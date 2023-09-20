@@ -1,0 +1,8 @@
+Assignment: Compulsory Assignment 2
+Grade: 10.0
+General feedback:
+good job, it looks like you got the concept of semaphores and locks :)
+
+Comments:
+oblig.c:119:1: surrounding an assignment with a lock has no effect
+readme:2:1: Compulsory*

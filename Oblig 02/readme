@@ -1,0 +1,42 @@
+----------------------------
+Compulsary Assignment INF113
+----------------------------
+
+I have essentially used a lot of the skeleton code in order to get a rough idea of how program should look like, and what should be in the simulation.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+In order to be able to see what I have implemented, I have added a lot of comments where I deemed necessary, but the entire thought process was:
+
+Set some baseline variables, for example NUM_CARS which would define the amount of cars driving around. Since it is an infinite loop, while(1)
+it does lead to cars getting tested multiple times. Since this was okay, and it was easy to implement, I went with it.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+Then I needed a int variable to keep track of the constantly changing queue. "WaitingLine". So whenever a car enters the queue, it adds one to the queue,
+and when the testing is completed, it'll remove one from the queue.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+An issue I did stumble upon was assigning an id for the cars, but that was fixed by assigning an id to each car through a for loop then creating a
+pthread for each car.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+A really annoying issue, but not that destructive was without adding sleep functions around. Without them it would be sending maybe 4-5 lines of output every time the loop was ran, which made it really difficult to see what was going on in the output. This was fixed by adding sleep(5) which wait 5 seconds before continuing. On the testing process itself, I made it random simply because I assumed that the doctor would be testing people at different speeds.
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+For semaphores, the reason for using them is to prevent two threads from changing information thus conflicting. I identified two semaphores. One for the doctor, and one for the cars. I used mutex to synchronize the threads together to avoid getting a wrong queue count. First I defined the semaphores and the mutex lock. Then I initialized them in the main function.
+A practical example of why a mutex lock is useful here is let's say you have the doctor testing cars.
+
+"Car 1 gets in line"
+"Car 1 is getting tested"
+"Car 2 gets line line"
+"Car 2 is getting tested"
+"Car 2 finished"
+"Car 2 finished"
+
+This is an issue you would stumble upon if you did not synchronize the two threads to each other by using mutex.
+
+As for the initial values for the semaphores, from my program:
+
+sem_init(&Doctor_Sleep, 0, 0);
+sem_init(&Car_Sem, 0, 0);
+for(id = 0; id < 3; ++id);
+	sem_init(&QueueSem[id], 0, 0);
+
+I set the initial values to be 0, the semaphore is shared among all threads of a process (and will thus be visible to all of them).
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+A small note for the actual running of the program, I did stumble upon a small bug happening quite rarely. If the queue was filled up swiftly before the doctor could start testing, it would get "stuck" and cars would come and go to check for a spot, but there wouldn't be one because the doctor wouldn't get to work. I was not able to identify the reason for this..
+-------------------------------------------------------------------------------------------------------------------------------------------------------

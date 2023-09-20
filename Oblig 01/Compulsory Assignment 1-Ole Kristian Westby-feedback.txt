@@ -1,0 +1,12 @@
+Assignment: Compulsory Assignment 1
+Grade: 10.0
+General feedback:
+Good job, over all a very solid hand-in:)
+
+Comments:
+Text answers.txt:38:1: In C, there is built-in value for NULL, it is simply a macro (often defined as "#define NULL 0"), which means that dereferencing a NULL pointer is equivalent to looking up memory address 0x0. This address is almost always outside of the segment, causing the fault.
+Text answers.txt:57:1: Exactly:)
+Text answers.txt:103:1: In this case a memory leak.
+Text answers.txt:206:1: Perfect! Well done on part 1:)
+Text answers.txt:237:1: Precisely:)
+Text answers.txt:448:1: Well done! Not much to add, very good work!:)
